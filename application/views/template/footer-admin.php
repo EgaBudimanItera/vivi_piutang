@@ -36,3 +36,30 @@
 
 <!-- Mirrored from vergo-kertas.herokuapp.com/tables-datatables.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 May 2016 18:30:30 GMT -->
 </html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+        $("#info-alert").fadeTo(2000,50).slideUp(50,function(){
+            $("#info-alert").slideUp(50);
+        });
+        $("#kodepelanggan").select2();
+
+      function format(item) {
+        var originalOption = item.element;
+        var originalText = item.text;
+        var s = '<span style="font-weight:bold">' + originalText+ '</span><br/>' +
+                '<span style="color:#888">' + $(originalOption).data('satuan') +'</span><br/>'+
+                '<span style="color:#888">' + $(originalOption).data('harga') +'</span><br/>';
+        return s;
+      }
+      $('#kodebarang').select2({
+        
+        formatResult: format,
+        formatSelection: format,
+        escapeMarkup: function(m) { return m; }
+      });
+
+    })
+
+ 
+</script>

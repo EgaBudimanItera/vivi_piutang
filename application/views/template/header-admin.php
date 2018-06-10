@@ -26,19 +26,21 @@
 	
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/plugins/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/plugins/font-awesome/css/font-awesome.min.css">
-	
+	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/plugins/select2/select2.css">
 	<!-- END CSS FRAMEWORK -->
 	
 	<!-- BEGIN CSS PLUGIN -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/plugins/pace/pace-theme-minimal.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/plugins/jquery-datatables/css/dataTables.bootstrap.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+	
 	<!-- <link rel="stylesheet" href="<?=base_url()?>assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css"> -->
 	<!-- END CSS PLUGIN -->
 	
 	<!-- BEGIN CSS TEMPLATE -->
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/css/main.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/back-end/assets/css/skins.css">
+	
 	
 	<!-- END CSS TEMPLATE -->
 </head>

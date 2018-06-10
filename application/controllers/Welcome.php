@@ -20,7 +20,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data=array('page'=>'ju');
+		$data=array('page'=>'admin','link'=>'');
+
 		$this->load->view('template/wrapper-admin',$data);
 	}
 }

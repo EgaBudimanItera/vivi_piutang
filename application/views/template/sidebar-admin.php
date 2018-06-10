@@ -1,4 +1,4 @@
-		
+	
 		<!-- BEGIN SIDEBAR -->
 		<aside class="left-side sidebar-offcanvas">
 			<section class="sidebar">
@@ -17,59 +17,31 @@
 				</form>
 				<ul class="sidebar-menu">
 					
-					<li class="active">
-						<a href="index.php">
-							<i class="fa fa-bar-chart-o"></i><span>Dashboard</span>
+					<li class="<?php if($link=='dashboard' ||$link==""){echo'active';}?>">
+						<a href="<?=base_url()?>">
+							<i class="fa fa-home"></i><span>Dashboard</span>
 						</a>
 					</li>
-					<li class="menu active">
-						<a href="index.php">
-							<i class="fa fa-building"></i><span>Barang</span>
-							<i class="fa fa-angle-left pull-right"></i>
+					<li class="<?php if($link=='satuan'){echo'active';}?>">
+						<a href="<?=base_url()?>c_satuan">
+							<i class="fa fa-briefcase"></i><span>Data Satuan Barang</span>	
 						</a>
-						<ul class="sub-menu">
-							<li><a href="<?=base_url()?>">Data Barang</a></li>
-						</ul>
 					</li>
-					<li class="">
-						<a href="index.php">
-							<i class="fa fa-building"></i><span>Pelanggan</span>
-							<i class="fa fa-angle-left pull-right"></i>
+					<li class="<?php if($link=='pelanggan'){echo'active';}?>">
+						<a href="<?=base_url()?>c_pelanggan">
+							<i class="fa fa-user"></i><span>Data Pelanggan</span>	
 						</a>
-						<ul class="sub-menu">
-							<li><a href="#">Data Pelanggan</a></li>
-						</ul>
 					</li>
-					<li class="">
-						<a href="index.php">
-							<i class="fa fa-dollar"></i><span>Pesanan</span>
-							<i class="fa fa-angle-left pull-right"></i>
+					<li class="<?php if($link=='barang'){echo'active';}?>">
+						<a href="<?=base_url()?>c_barang">
+							<i class="fa fa-truck"></i><span>Data Barang</span>	
 						</a>
-						<ul class="sub-menu">
-							<li><a href="#">Data Pesanan</a></li>
-						</ul>
 					</li>
-					<li class="">
-						<a href="index.php">
-							<i class="fa fa-dollar"></i><span>Penjualan</span>
-							<i class="fa fa-angle-left pull-right"></i>
+					<li class="<?php if($link=='penjualan'){echo'active';}?>">
+						<a href="<?=base_url()?>c_penjualan">
+							<i class="fa fa-truck"></i><span>Data Penjualan</span>	
 						</a>
-						<ul class="sub-menu">
-							<li><a href="#">Data Penjualan</a></li>
-						</ul>
 					</li>
-					
-					<li class="menu ">
-						<a href="index.php">
-							<i class="fa fa-align-left"></i><span>User</span>
-							<i class="fa fa-angle-left pull-right"></i>
-						</a>
-						<ul class="sub-menu">
-							<li><a href="#">Data Login Admin</a></li>
-							<li><a href="#">Data Login Pelanggan</a></li>
-						</ul>
-					</li>
-					
 				</ul>
 			</section>
 		</aside>

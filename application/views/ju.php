@@ -1,6 +1,5 @@
 
-    <!-- BEGIN CONTENT -->
-    <aside class="right-side">
+    
       <!-- BEGIN CONTENT HEADER -->
       <section class="content-header">
         <i class="fa fa-file-text-o"></i>
@@ -68,5 +67,4 @@
        
       </section>
       <!-- END MAIN CONTENT -->
-    </aside>
-    <!-- END CONTENT -->
+   
