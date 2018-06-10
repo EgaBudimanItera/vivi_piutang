@@ -31,8 +31,40 @@ class C_penjualan extends CI_Controller {
         $this->load->view('template/wrapper-admin', $data);
     }
 
-   
-
+   public function tambahpenjualandetailtemp(){
+        $detpBrngKode=$this->input->post('detpBrngKode',true);
+        $detpJumlah=$this->input->post('detpJumlah',true);  
+        $detpHarga=$this->input->post('detpHarga',true); 
+        // $createdby=$this->session->userdata('userNama');
+        
+        $createdby="Ega";
+        $data=array(
+            'detpBrngKode'=>$detpBrngKode,
+            'detpJumlah'=>$detpJumlah,
+            'detpHarga'=>$detpHarga,
+            'detpCreatedBy'=>$createdby,
+        );
+        $simpandetailtemp=$this->M_penjualan->simpan_penjualan_detail_temp($data);
+        if($simpandetailtemp){
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
+            );
+            echo json_encode(array('status'=>'success'));
+         }else{
+           $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
+            );
+           echo json_encode(array('status'=>'fail'));
+         }
+   }
+   public function formdetailtemp(){
+    $data = array(
+        'listbarang' =>$this->M_penjualan->list_penjualan_detail_temp(),
+    );
+    $this->load->view('penjualan/detailtemp',$data);
+   }
     public function tambahpenjualan1(){
         $kodepelanggan=$this->input->post('pnjlPlgnKode',true);
         $jumlahpiutang=$this->M_pelanggan->ambil_pelanggan('plgnKode',$kodepelanggan)->row();
@@ -94,5 +126,22 @@ class C_penjualan extends CI_Controller {
             '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
         );
      }
+    }
+
+    public function hapusdetail($id){
+        $hapusdetailtemp=$this->M_penjualan->hapus_penjualan_detail_temp('detpId',$id);
+        if($hapusdetailtemp){
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+            );
+            echo json_encode(array('status'=>'success'));
+         }else{
+           $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+            );
+           echo json_encode(array('status'=>'fail'));
+         }
     }
 }

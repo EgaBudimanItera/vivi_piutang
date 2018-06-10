@@ -100,4 +100,9 @@ class C_barang extends CI_Controller {
         );
      }
     }
+
+    public function getbarang($kodebarang){
+        $data = $this->db->query("SELECT * FROM barang WHERE brngKode='$kodebarang'")->row_array();
+        echo json_encode($data);
+    }
 }

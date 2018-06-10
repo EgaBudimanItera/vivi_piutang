@@ -37,8 +37,9 @@ class M_penjualan extends CI_Model {
 
     //list
     function list_penjualan_detail_temp(){
-        $createdby=$this->session->userdata('userNama');
-        $query=$this->db->get_where('penjualan_detail_temp',array('detpCreatedBy' => $createdby)); 
+        // $createdby=$this->session->userdata('userNama');
+        $createdby="ega";
+        $query=$this->db->get_where('vw_detailtemp',array('detpCreatedBy' => $createdby)); 
         return $query->result();
     }
 

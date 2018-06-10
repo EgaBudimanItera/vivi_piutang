@@ -17,20 +17,6 @@
     <!-- BEGIN HORIZONTAL FORM -->
     <div class="col-md-12">
       <div class="grid">
-        <!-- <div class="grid-header">
-          <span class="grid-title">
-            <h6>
-              <button type="button" class="btn btn-primary" onclick="self.history.back()">
-                  <i class="fa fa-arrow-left"></i> Kembali
-              </button>
-            </h6>
-          </span>
-          <div class="pull-right grid-tools">
-            <a data-widget="collapse" title="Collapse"><i class="fa fa-chevron-up"></i></a>
-            <a data-widget="reload" title="Reload"><i class="fa fa-refresh"></i></a>
-            <a data-widget="remove" title="Remove"><i class="fa fa-times"></i></a>
-          </div>
-        </div> -->
         <div id="info-alert">
           <?=@$this->session->flashdata('msg')?>
         </div>
@@ -51,11 +37,48 @@
               </div>
             </div>
 
+            
+            
             <div class="form-group">
-              <label class="col-sm-2 control-label">Nama Barang</label>
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="btn-group">
+                  
+                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#detailbarangModal">Tambahkan Barang
+                  </a>
+                  <button class="btn btn-success">Simpan Semua Barang</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="tampilpenjualan">
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- END HORIZONTAL FORM -->
+  </div>
+</section>
+<!-- END MAIN CONTENT -->
+
+
+<div class="modal fade" id="detailbarangModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-wrapper">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-blue">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel1">Tambahkan Barang</h4>
+        </div>
+        <div class="modal-body">
+          <!--id="formTambahBarang"-->
+          <form class="form-horizontal" id="formTambahBarang" role="form" method="post">
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Nama Barang</label>
               <div class="col-sm-6">
                 <select name="detpBrngKode" id="kodebarang" class="select2-containerpopulate" style="width: 300px"required="">
-                  <option value=""></option>
+                  <option value="" data-harga="" data-satuan="">Pilih</option>
                   <?php    
                     foreach($listbarang as $ld ){
                   ?>
@@ -67,24 +90,28 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label">Jumlah Barang</label>
+              <label class="col-sm-4 control-label">Jumlah Barang</label>
               <div class="col-sm-3">
-                <input name="detpHarga" type="number" class="form-control" " maxlength="3" required="">
+                <input name="detpJumlah" type="number" class="form-control" id="detpJumlah" maxlength="3" required="">
               </div>
-            </div>
+            </div> 
             <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <div class="btn-group">
-                  <button type="submit" class="btn btn-primary">Next</button>
-                  <button type="reset" class="btn btn-default">Bersih</button>
-                </div>
+              <label class="col-sm-4 control-label">Harga Barang Satuan (Rp)</label>
+              <div class="col-sm-5">
+                <input name="detpHarga" id="detpHarga" type="number" class="form-control" " maxlength="3" required="">
               </div>
-            </div>
-          </form>
+            </div> 
+          
         </div>
+        <div class="modal-footer">
+          <div class="btn-group">
+            
+            <button type="button" class="btn btn-warning" onclick="simpan()">Save changes</button>
+          </div>
+        </div>
+      </form>
       </div>
     </div>
-    <!-- END HORIZONTAL FORM -->
   </div>
-</section>
-<!-- END MAIN CONTENT -->
+</div>
+
