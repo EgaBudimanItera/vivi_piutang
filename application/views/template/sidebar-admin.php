@@ -47,6 +47,11 @@
 							<i class="fa fa-dollar"></i><span>Data Pembayaran</span>	
 						</a>
 					</li>
+					<li class="<?php if($link=='historipiutang'){echo'active';}?>">
+						<a href="<?=base_url()?>c_histori">
+							<i class="fa fa-tasks"></i><span>Histori Piutang</span>	
+						</a>
+					</li>
 				</ul>
 			</section>
 		</aside>
