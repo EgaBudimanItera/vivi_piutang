@@ -39,7 +39,12 @@
 					</li>
 					<li class="<?php if($link=='penjualan'){echo'active';}?>">
 						<a href="<?=base_url()?>c_penjualan">
-							<i class="fa fa-truck"></i><span>Data Penjualan</span>	
+							<i class="fa fa-cubes"></i><span>Data Penjualan</span>	
+						</a>
+					</li>
+					<li class="<?php if($link=='pembayaran'){echo'active';}?>">
+						<a href="<?=base_url()?>c_pembayaran">
+							<i class="fa fa-dollar"></i><span>Data Pembayaran</span>	
 						</a>
 					</li>
 				</ul>

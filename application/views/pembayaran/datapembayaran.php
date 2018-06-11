@@ -2,7 +2,7 @@
 <section class="content-header">
   <h3> 
     <i class="fa fa-list-alt"></i>
-    <span>Data Penjualan</span>
+    <span>Data Pembayaran</span>
   </h3>
 </section>
 <!-- END CONTENT HEADER -->
@@ -14,10 +14,10 @@
         <div class="grid-header">
           <i class="fa fa-perusahaan"></i>
           <span class="grid-title">
-            <a href="<?=base_url()?>c_penjualan/formtambah">
+            <a href="<?=base_url()?>c_pembayaran/formtambah">
               <h6>
                 <button type="button" class="btn btn-primary ">
-                  <i class="fa fa-plus"></i> Tambahkan Penjualan
+                  <i class="fa fa-plus"></i> Tambahkan Pembayaran
                 </button>
               </h6>
             </a>  
@@ -36,10 +36,11 @@
             <thead>
               <tr>
                 <th class="col-md-1">No</th>
+                <th class="col-md-2">Kode Pembayaran</th>
+                <th class="col-md-2">Tanggal</th>
+                <th class="col-md-2">Nama Toko</th>
                 <th class="col-md-2">Kode Penjualan</th>
-                <th class="col-md-1">Tanggal</th>
-                <th class="col-md-3">Nama Pelanggan</th>
-                <th class="col-md-2">Total Penjualan (Rp)</th>
+                <th class="col-md-2">Jumlah Bayar</th>
                 <th class="col-md-2">Aksi</th>
               </tr>
             </thead>
@@ -52,18 +53,14 @@
 
               <tr>
                 <td><?=$no++;?></td>
-                <td><?=$l->pnjlKode?></td>
-                <td><?=$l->pnjlTanggal?></td>
+                <td><?=$l->pybrKode?></td>
+                <td><?=$l->pybrTanggal?></td>
                 <td><?=$l->plgnNama?></td>
-                <td align="right"><?php echo number_format($l->pnjlTotalPenjualan)?></td>
+                <td><?=$l->pybrPnjlKode?></td>
+                <td align="right"><?php echo number_format($l->pybrJumlahBayar)?></td>
                 <td>
                   <center>
-                    <a href="<?=base_url()?>c_penjualan/detailpenjualan/<?=$l->pnjlKode?>">
-                      <button type="button" class="btn btn-primary btn-xs">
-                        <i class="fa fa-eye"></i>
-                      </button>
-                    </a>
-                    <a href="<?=base_url()?>c_penjualan/hapuspenjualan/<?=$l->pnjlKode?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')">
+                    <a href="<?=base_url()?>c_pembayaran/hapuspembayaran/<?=$l->pybrKode?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')">
                       <button type="button" class="btn btn-danger btn-xs">
                         <i class="fa fa-trash-o"></i>                      
                       </button>

@@ -9,11 +9,13 @@ class C_barang extends CI_Controller {
 		$this->load->model('M_barang');
         $this->load->model('M_satuan');
 	}
+    //pages
 
     public function index(){
         $data = array(
             'page' => 'barang/databarang',
             'link' => 'barang',
+            'script'=>'',
             'list' => $this->M_barang->list_barang(),
         );
         $this->load->view('template/wrapper-admin', $data);
@@ -23,6 +25,7 @@ class C_barang extends CI_Controller {
         $data = array(
             'page' => 'barang/tambahbarang',
             'link' => 'barang',
+            'script'=>'',
             'list' => $this->M_barang->kode_barang(),
             'listsatuan'=>$this->M_satuan->list_satuan(),
         );
@@ -34,12 +37,13 @@ class C_barang extends CI_Controller {
         $data = array(
             'page' => 'barang/ubahbarang',
             'link' => 'barang',
+            'script'=>'',
             'list' => $this->M_barang->ambil_barang('brngKode',$brngKode)->row(),
             'listsatuan'=>$this->M_satuan->list_satuan(),
         );
         $this->load->view('template/wrapper-admin', $data);
     }
-
+    //crud
     public function tambahbarang(){
         $data = array(
             'brngKode' => $this->M_barang->kode_barang(),
@@ -99,10 +103,12 @@ class C_barang extends CI_Controller {
             '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
         );
      }
-    }
+    }    
 
+    //etc
     public function getbarang($kodebarang){
-        $data = $this->db->query("SELECT * FROM barang WHERE brngKode='$kodebarang'")->row_array();
+        // $data = $this->db->query("SELECT * FROM barang WHERE brngKode='$kodebarang'")->row_array();
+        $data=$this->M_barang->ambil_barang('brngKode',$kodebarang)->row_array();
         echo json_encode($data);
     }
 }

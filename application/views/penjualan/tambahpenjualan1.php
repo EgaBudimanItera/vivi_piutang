@@ -1,6 +1,4 @@
-<!-- <?php
-  var_dump($listbarang);
-?> -->
+
 <!-- BEGIN CONTENT HEADER -->
 <section class="content-header">
   <h3> 
@@ -21,7 +19,7 @@
           <?=@$this->session->flashdata('msg')?>
         </div>
         <div class="grid-body">
-          <form class="form-horizontal" role="form" action="<?=base_url()?>c_penjualan/tambahpenjualan1" method="post">
+          <form class="form-horizontal" role="form" action="<?=base_url()?>c_penjualan/tambahpenjualan2" method="post">
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Kode Pelanggan</label>
@@ -36,16 +34,13 @@
                 <input name="plgnNama" type="text" class="form-control" value="<?=$listpelanggan->plgnNama?>" maxlength="30" readonly="">
               </div>
             </div>
-
-            
-            
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <div class="btn-group">
                   
                   <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#detailbarangModal">Tambahkan Barang
                   </a>
-                  <button class="btn btn-success">Simpan Semua Barang</button>
+                  <button class="btn btn-success" type="submit">Simpan Semua Barang</button>
                 </div>
               </div>
             </div>
@@ -90,18 +85,17 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-4 control-label">Jumlah Barang</label>
-              <div class="col-sm-3">
-                <input name="detpJumlah" type="number" class="form-control" id="detpJumlah" maxlength="3" required="">
-              </div>
-            </div> 
-            <div class="form-group">
               <label class="col-sm-4 control-label">Harga Barang Satuan (Rp)</label>
               <div class="col-sm-5">
                 <input name="detpHarga" id="detpHarga" type="number" class="form-control" " maxlength="3" required="">
               </div>
             </div> 
-          
+             <div class="form-group">
+              <label class="col-sm-4 control-label">Jumlah Barang</label>
+              <div class="col-sm-3">
+                <input name="detpJumlah" type="number" class="form-control" id="detpJumlah" maxlength="3" required="">
+              </div>
+            </div> 
         </div>
         <div class="modal-footer">
           <div class="btn-group">

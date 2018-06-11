@@ -8,11 +8,12 @@ class C_pelanggan extends CI_Controller {
 		parent::__construct();
 		$this->load->model('M_pelanggan');
 	}
-
+    //pages
     public function index(){
         $data = array(
             'page' => 'pelanggan/datapelanggan',
             'link' => 'pelanggan',
+            'script'=>'',
             'list' => $this->M_pelanggan->list_pelanggan(),
         );
         $this->load->view('template/wrapper-admin', $data);
@@ -22,6 +23,7 @@ class C_pelanggan extends CI_Controller {
         $data = array(
             'page' => 'pelanggan/tambahpelanggan',
             'link' => 'pelanggan',
+            'script'=>'',
             'list' => $this->M_pelanggan->kode_pelanggan(),
         );
         $this->load->view('template/wrapper-admin', $data);
@@ -32,11 +34,12 @@ class C_pelanggan extends CI_Controller {
         $data = array(
             'page' => 'pelanggan/ubahpelanggan',
             'link' => 'pelanggan',
+            'script'=>'',
             'list' => $this->M_pelanggan->ambil_pelanggan('plgnKode',$plgnKode)->row(),
         );
         $this->load->view('template/wrapper-admin', $data);
     }
-
+    //crud
     public function tambahpelanggan(){
         $data = array(
             'plgnKode' => $this->M_pelanggan->kode_pelanggan(),
@@ -99,4 +102,8 @@ class C_pelanggan extends CI_Controller {
         );
      }
     }
+    //etc
+    
+
+    
 }

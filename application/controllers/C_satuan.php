@@ -8,11 +8,12 @@ class C_satuan extends CI_Controller {
 		parent::__construct();
 		$this->load->model('M_satuan');
 	}
-
+    //pages
     public function index(){
         $data = array(
             'page' => 'satuan/datasatuan',
             'link' => 'satuan',
+            'script'=>'',
             'list' => $this->M_satuan->list_satuan(),
         );
         $this->load->view('template/wrapper-admin', $data);
@@ -22,6 +23,7 @@ class C_satuan extends CI_Controller {
         $data = array(
             'page' => 'satuan/tambahsatuan',
             'link' => 'satuan',
+            'script'=>'',
             'list' => $this->M_satuan->kode_satuan(),
         );
         $this->load->view('template/wrapper-admin', $data);
@@ -32,11 +34,12 @@ class C_satuan extends CI_Controller {
         $data = array(
             'page' => 'satuan/ubahsatuan',
             'link' => 'satuan',
+            'script'=>'',
             'list' => $this->M_satuan->ambil_satuan('stunKode',$stunKode)->row(),
         );
         $this->load->view('template/wrapper-admin', $data);
     }
-
+    //crud
     public function tambahsatuan(){
         $data = array(
             'stunKode' => $this->M_satuan->kode_satuan(),
@@ -94,4 +97,5 @@ class C_satuan extends CI_Controller {
         );
      }
     }
+    //etc   
 }

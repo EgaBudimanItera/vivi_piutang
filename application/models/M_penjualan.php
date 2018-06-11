@@ -2,7 +2,7 @@
 
 
 class M_penjualan extends CI_Model {
-	
+
     //simpan
 	function simpan_penjualan_detail_temp($data){
         $this->db->insert('penjualan_detail_temp', $data);
@@ -16,6 +16,11 @@ class M_penjualan extends CI_Model {
 
     function simpan_penjualan_detail($data){
         $this->db->insert('penjualan_detail', $data);
+        return true;
+    }
+
+    function simpan_batch_penjualan_detail($data){
+        $this->db->insert_batch('penjualan_detail',$data);
         return true;
     }
 
@@ -36,9 +41,8 @@ class M_penjualan extends CI_Model {
     }
 
     //list
-    function list_penjualan_detail_temp(){
-        // $createdby=$this->session->userdata('userNama');
-        $createdby="ega";
+    function list_penjualan_detail_temp($createdby){
+        
         $query=$this->db->get_where('vw_detailtemp',array('detpCreatedBy' => $createdby)); 
         return $query->result();
     }
@@ -53,9 +57,20 @@ class M_penjualan extends CI_Model {
     }
 
     function list_penjualan_detail($kodepenjualan){
-        $query=$this->db->get_where('penjualan_detail',array('detpPenjKode' => $kodepenjualan)); 
+        $query=$this->db->get_where('vw_detail',array('detpPnjlKode' => $kodepenjualan)); 
         return $query->result(); 
     }
+
+    function list_view_penjualan(){
+        $query=$this->db->get_where('vw_penjualan',array('pnjlTotalBayar>' => 0)); 
+        return $query->result(); 
+    }
+
+    function list_view_penjualan_1baris($kodepenjualan){
+        $query=$this->db->get_where('vw_penjualan',array('pnjlKode' => $kodepenjualan)); 
+        return $query->row(); 
+    }
+
 
     //kode penjualan
     function kode_penjualan(){
@@ -77,4 +92,11 @@ class M_penjualan extends CI_Model {
         $kodejadi  = "P-".date("my")."-".$kodemax;
         return $kodejadi;
    	}
+
+    function totalpenjualan($createdby){
+         // $createdby=$this->session->userdata('userNama');
+       
+        $total=$this->db->query("SELECT COALESCE(sum(subtotal),0) AS total FROM vw_detailtemp WHERE detpCreatedBy='$createdby'")  ;
+        return $total->row();  
+    }
 }
