@@ -12,34 +12,44 @@ class C_histori extends CI_Controller {
     //pages
 
     public function index(){
-        
         $data = array(
             'page' => 'historipiutang/datahistori',
             'link' => 'historipiutang',
             'script'=>'script/historipiutang',
-            // 'listsaldoawal' => $saldoawal,
-            // 'listsaldoakhir'=>$saldoakhir,
-            // 'listisi'=>$this->M_histori->listhistori_isi('P003','2018-06-11','2018-06-12')->result(),
             'listpelanggan'=>$this->M_pelanggan->list_pelanggan(),
         );
         $this->load->view('template/wrapper-admin', $data);
     }
-    public function pencarian(){
-        // $listsaldoawal=$this->M_histori->listhistori_saldoawal('P003','2018-06-11')->row();
-        // $jumlahdata=$listsaldoawal->jumlah;
-        // if($jumlahdata==0){
-        //     $saldoawal=0;
-        // }else{
-        //     $saldoawal=$listsaldoawal->histSaldo;
-        // }
-
-        // $listsaldoakhir=$this->M_histori->listhistori_saldoakhir('P003')->row();
-        
-        // $jumlahdataak=$listsaldoakhir->jumlah;
-        // if($jumlahdataak==0){
-        //     $saldoakhir=0;
-        // }else{
-        //     $saldoakhir=$listsaldoakhir->histSaldo;
-        // }   
+    public function caripiutang(){
+        $kodepelanggan=$this->input->post('pnjlPlgnKode',true);
+        $tglawal=$this->input->post('daritanggal',true);
+        $tglakhir=$this->input->post('hinggatanggal',true);
+        $jumlahdataawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->jumlah;
+        if($jumlahdataawal==0){
+            $saldoawal=0;
+        }
+        else{
+            $saldoawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->histSaldo;
+        }
+        $jumlahdataakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->row()->jumlah;
+        if($jumlahdataakhir==0){
+            $saldoakhir=0;
+        }
+        else{
+            $saldoakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->row()->histSaldo;   
+        }
+        $data=array(
+            'page' => 'historipiutang/datahistori1',
+            'link' => 'historipiutang',
+            'script'=>'',
+            'listhistoriisi'=>$this->M_histori->listhistori_isi($kodepelanggan,$tglawal,$tglakhir)->result(),
+            'listsaldoawal'=>$saldoawal,
+            'listsaldoakhir'=>$saldoakhir,
+            'kodepelanggan'=>$kodepelanggan,
+            'tglawal'=>$tglawal,
+            'tglakhir'=>$tglakhir,
+            'namapelanggan'=>$this->M_pelanggan->ambil_pelanggan('plgnKode',$kodepelanggan)->row(),
+        );
+        $this->load->view('template/wrapper-admin', $data);
     }
 }

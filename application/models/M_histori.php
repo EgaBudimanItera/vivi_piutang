@@ -19,10 +19,8 @@ class M_histori extends CI_Model {
     	return $query=$this->db->get();
     }
     function listhistori_isi($kodepelanggan,$tglawal,$tglakhir){
-    	$this->db->select('*,count(*)as jumlah');
-    	$this->db->from('vw_histori');
-    	$this->db->where(array('histPlgnKode'=>$kodepelanggan,'histTanggal>='=>$tglawal,'histTanggal<='=>$tglakhir));
-    	$this->db->order_by("histKode","desc");
-    	return $query=$this->db->get();
+        $result=$this->db->query("SELECT * FROM vw_histori where histPlgnKode='$kodepelanggan' AND histTanggal between '$tglawal' AND '$tglakhir' ORDER BY histkode asc");
+    	return $result;
     }
+    
 }
