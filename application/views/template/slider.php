@@ -15,7 +15,7 @@
                         data-speed="700" 
                         data-start="1700" 
                         data-easing="easeOutBack"> 
-            <span><i class="fa fa-star-o"></i> </span>Aplikasi Penjualan<span><i class="fa fa-star-o"></i></span></div>
+            <span><i class="fa fa-star-o"></i> </span>Aplikasi Piutang<span><i class="fa fa-star-o"></i></span></div>
                  
         </li>
     <!-- Slide 2 -->

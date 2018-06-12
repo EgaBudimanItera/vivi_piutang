@@ -4,7 +4,7 @@
 <!-- Mirrored from www.slashdown.nl/starhotel/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2014 17:40:50 GMT -->
 <head>
 <meta charset="utf-8">
-<title>Aplikasi Penjualan</title>
+<title>Aplikasi Piutang</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" href="assets/front-end/images/logoola.png">
 
@@ -79,7 +79,7 @@
         <a href="index.php" class="navbar-brand">         
         <!-- Logo -->
       <div id="logo"> 
-      <img id="default-logo" src="assets/front-end/images/logoola.png" style="height:50px;"> </div>
+      <img id="default-logo" src="<?=base_url()?>assets/front-end/images/logoola.png" style="height:50px;"> </div>
         </a> 
         
       </div>
@@ -87,18 +87,12 @@
         <ul class="nav navbar-nav">
           
         
-          <li class="dropdown active"> <a href="index.php">Beranda</a>
+          <li class="dropdown <?php if($link=='beranda' ||$link==""){echo'active';}?>"> <a href="<?=base_url()?>">Beranda</a>
           </li>
-          <li class="dropdown "> <a href="index.php">Tentang Kami</a>
+          <li class="dropdown <?php if($link=='visi'){echo'active';}?>"> <a href="<?=base_url()?>visiuser">Visi Misi</a>
           </li>
-          <li class="dropdown "> <a href="index.php">Bantuan</a>
-          </li>
-          
-          <li class="dropdown "> <a href="index.php?mod=page/barang&pg=data_barang">Data Barang</a>
-          </li>
-          <li class="dropdown "> <a href="index.php?mod=page/login&pg=logout2">Logout</a>
-          
-          </li>
+         
+          <li class="dropdown <?php if($link=='login'){echo'active';}?>"> <a href="<?=base_url()?>loginuser">Login</a></li>
           
         </ul>
       </div>

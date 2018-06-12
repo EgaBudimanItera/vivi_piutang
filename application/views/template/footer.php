@@ -3,7 +3,7 @@
 <div class="footer-bottom">
 <div class="container">
 <div class="row">
-<div class="col-xs-6"> &copy; 2017 Ola</div>
+<div class="col-xs-6"> &copy; 2018 Nama Perusahaan</div>
 
 </div>
 </div>
@@ -15,5 +15,5 @@
 
 </body>
 
-<!-- Mirrored from www.slashdown.nl/starhotel/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2014 17:42:24 GMT -->
+
 </html>

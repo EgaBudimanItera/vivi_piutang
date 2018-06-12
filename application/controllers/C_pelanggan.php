@@ -60,6 +60,7 @@ class C_pelanggan extends CI_Controller {
                 'msg', 
                 '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
             );
+           redirect(base_url().'c_pelanggan/formtambah'); 
          }
     }
 
@@ -83,6 +84,7 @@ class C_pelanggan extends CI_Controller {
                 'msg', 
                 '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
             );
+           redirect(base_url().'c_pelanggan/formubah'.$plgnKode);
          }
     }
 
@@ -100,6 +102,7 @@ class C_pelanggan extends CI_Controller {
             'msg', 
             '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
         );
+       redirect(base_url().'c_pelanggan');
      }
     }
     //etc

@@ -52,6 +52,16 @@
 							<i class="fa fa-tasks"></i><span>Histori Piutang</span>	
 						</a>
 					</li>
+					<li class="<?php if($link=='login'){echo'active';}?>">
+						<a href="<?=base_url()?>c_userlogin">
+							<i class="fa fa-users"></i><span>User Login</span>	
+						</a>
+					</li>
+					<li class="<?php if($link=='ubahpassword'){echo'active';}?>">
+						<a href="<?=base_url()?>c_userlogin/ubahpassword">
+							<i class="fa fa-pencil"></i><span>Ubah Password</span>	
+						</a>
+					</li>
 				</ul>
 			</section>
 		</aside>

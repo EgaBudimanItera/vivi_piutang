@@ -16,7 +16,7 @@
               <button type="button" class="btn btn-primary" onclick="self.history.back()">
                   <i class="fa fa-arrow-left"></i> Kembali
               </button>
-              <a href="<?=base_url()?>c_histori/cetakkartu">
+              <a href="<?=base_url()?>c_histori/cetakkartu/<?=$kodepelanggan?>/<?=$tglawal?>/<?=$tglakhir?>" target="_blank">
                 <button type="button" class="btn btn-success" >
                     <i class="fa fa-print"></i> Cetak
                 </button>

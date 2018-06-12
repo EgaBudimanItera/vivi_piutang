@@ -52,4 +52,30 @@ class C_histori extends CI_Controller {
         );
         $this->load->view('template/wrapper-admin', $data);
     }
+    public function cetakkartu($kodepelanggan,$tglawal,$tglakhir){
+        $jumlahdataawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->jumlah;
+        if($jumlahdataawal==0){
+            $saldoawal=0;
+        }
+        else{
+            $saldoawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->histSaldo;
+        }
+        $jumlahdataakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->row()->jumlah;
+        if($jumlahdataakhir==0){
+            $saldoakhir=0;
+        }
+        else{
+            $saldoakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->row()->histSaldo;   
+        }
+        $data=array(
+            'link'=>'historipiutang',
+            'tglawal'=>$tglawal,
+            'tglakhir'=>$tglakhir,
+            'listpelanggan'=>$this->M_pelanggan->ambil_pelanggan('plgnKode',$kodepelanggan)->row(),
+            'listhistoriisi'=>$this->M_histori->listhistori_isi($kodepelanggan,$tglawal,$tglakhir)->result(),
+            'listsaldoawal'=>$saldoawal,
+            'listsaldoakhir'=>$saldoakhir,
+        );
+        $this->load->view('historipiutang/kartupiutang', $data);
+    }
 }
