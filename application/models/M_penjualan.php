@@ -70,7 +70,10 @@ class M_penjualan extends CI_Model {
         $query=$this->db->get_where('vw_penjualan',array('pnjlKode' => $kodepenjualan)); 
         return $query->row(); 
     }
-
+    function list_untuk_dashboard(){
+        $result=$this->db->query("SELECT *,(TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1 as jumlah_hari from vw_penjualan where ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=-7");
+        return $result;
+    }
 
     //kode penjualan
     function kode_penjualan(){
@@ -94,7 +97,7 @@ class M_penjualan extends CI_Model {
    	}
 
     function totalpenjualan($createdby){
-         // $createdby=$this->session->userdata('userNama');
+         
        
         $total=$this->db->query("SELECT COALESCE(sum(subtotal),0) AS total FROM vw_detailtemp WHERE detpCreatedBy='$createdby'")  ;
         return $total->row();  

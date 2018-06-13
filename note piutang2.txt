@@ -1,0 +1,40 @@
+
+/*belum jatuh tempo*/
+(select '1' as nomor,('Belum Jatuh Tempo') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.02 as persen,COALESCE(sum(pnjlTotalBayar)*0.02,0) as estimasi from penjualan 
+where  pnjlTotalBayar>0 and pnjlJatuhTempo>=now())
+union
+/* telat 1-30 hari*/
+(select '2' as nomor,('Menunggak 1-30 Hari') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.05 as persen,COALESCE(sum(pnjlTotalBayar)*0.05,0) as estimasi from penjualan 
+where pnjlTotalBayar>0 and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=1 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=30)
+union
+/*telat 31-60 hari*/
+(select '3' as nomor,('Menunggak 31-60 Hari') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.1 as persen,COALESCE(sum(pnjlTotalBayar)*0.1,0) as estimasi from penjualan 
+where pnjlTotalBayar>0 and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=31 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=60)
+union
+/*telat 61-90 hari*/
+(select '4' as nomor,('Menunggak 61-90 Hari') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.2 as persen,COALESCE(sum(pnjlTotalBayar)*0.2,0) as estimasi from penjualan 
+where pnjlTotalBayar>0 and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=61 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=90)
+union
+/*telat 91-180 hari*/
+(select '5' as nomor,('Menunggak 91-180 Hari') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.3 as persen,COALESCE(sum(pnjlTotalBayar)*0.3,0) as estimasi from penjualan 
+where pnjlTotalBayar>0 and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=91 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=180)
+union
+/*telat 180-365 hari*/
+(select '6' as nomor,('Menunggak 180-365 Hari') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.5 as persen,COALESCE(sum(pnjlTotalBayar)*0.5,0) as estimasi from penjualan 
+where pnjlTotalBayar>0 and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=181 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=365)
+union
+/*telat lebih dari 365 hari*/
+(select '7' as nomor,('Menunggak 1-30 Hari') as kelompok_umur,
+COALESCE(sum(pnjlTotalBayar),0) as saldo,0.8 as persen,COALESCE(sum(pnjlTotalBayar)*0.8,0) as estimasi from penjualan 
+where pnjlTotalBayar>0 and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=366 )

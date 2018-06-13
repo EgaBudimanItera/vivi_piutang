@@ -11,6 +11,19 @@ class C_pembayaran extends CI_Controller {
         $this->load->model('M_penjualan');
         $this->load->model('M_satuan');
         $this->load->model('M_pembayaran');
+        $this->load->model('M_userlogin');
+        if($this->session->userdata('status') != "login"){
+            echo '<script>alert("Maaf, anda harus login terlebih dahulu")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }else{
+            $userNama = $this->session->userdata('userNama');
+            $cek = $this->M_userlogin->ambil_user('userNama', $userNama)->num_rows();
+
+            if($cek == 0){
+                echo '<script>alert("User tidak ditemukan di database")</script>';
+                echo'<script>window.location.href="'.base_url().'";</script>';
+            }
+        }     
 	}
     //pages
 
@@ -37,7 +50,7 @@ class C_pembayaran extends CI_Controller {
     //crud
     public function simpanpembayaran(){
         $createdby=$this->session->userdata('userNama');
-        $createdby="ega";
+       
         $pybrPnjlKode=$this->input->post('pybrPnjlKode',0);
         $pybrJumlahBayar=$this->input->post('pybrJumlahBayar',0);
         $pybrKode=$this->M_pembayaran->kode_pembayaran();

@@ -10,7 +10,19 @@ class C_penjualan extends CI_Controller {
         $this->load->model('M_pelanggan');
         $this->load->model('M_penjualan');
         $this->load->model('M_satuan');
-        
+        $this->load->model('M_userlogin');
+        if($this->session->userdata('status') != "login"){
+            echo '<script>alert("Maaf, anda harus login terlebih dahulu")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }else{
+            $userNama = $this->session->userdata('userNama');
+            $cek = $this->M_userlogin->ambil_user('userNama', $userNama)->num_rows();
+
+            if($cek == 0){
+                echo '<script>alert("User tidak ditemukan di database")</script>';
+                echo'<script>window.location.href="'.base_url().'";</script>';
+            }
+        }     
 	}
 
     public function index(){
@@ -61,7 +73,7 @@ class C_penjualan extends CI_Controller {
 
     public function tambahpenjualan2(){
         $createdby=$this->session->userdata('userNama');
-        $createdby='ega';
+        
         $kodepelanggan=$this->input->post('plgnKode',true);
         $kodepenjualan=$this->M_penjualan->kode_penjualan();
         $tanggal=date('Y-m-d');
@@ -122,7 +134,7 @@ class C_penjualan extends CI_Controller {
         $detpJumlah=$this->input->post('detpJumlah',true);  
         $detpHarga=$this->input->post('detpHarga',true); 
         $createdby=$this->session->userdata('userNama');
-        $createdby='ega';
+        
         $data=array(
             'detpBrngKode'=>$detpBrngKode,
             'detpJumlah'=>$detpJumlah,
@@ -146,7 +158,7 @@ class C_penjualan extends CI_Controller {
    }
    public function formdetailtemp(){
     $createdby=$this->session->userdata('userNama');
-    $createdby='ega';
+    
     $data = array(
         'listbarang' =>$this->M_penjualan->list_penjualan_detail_temp($createdby),
         'script'=>'script/penjualan',

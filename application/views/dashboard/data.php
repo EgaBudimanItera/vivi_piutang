@@ -1,3 +1,4 @@
+
 <!-- BEGIN CONTENT HEADER -->
 <section class="content-header">
   <h3> 
@@ -9,18 +10,14 @@
 <section class="content">
   <div class="row">
     <!-- BEGIN BASIC DATATABLES -->
-    <div class="col-md-9">
+    <div class="col-md-12">
       <div class="grid no-border">
         <div class="grid-header">
           <i class="fa fa-perusahaan"></i>
           <span class="grid-title">
-            Data Piutang Per Pelanggan
+            Data Penjualan Jatuh Tempo 
           </span>
-          <!-- <div class="pull-right grid-tools">
-            <a data-widget="collapse" title="Collapse"><i class="fa fa-chevron-up"></i></a>
-            <a data-widget="reload" title="Reload"><i class="fa fa-refresh"></i></a>
-            <a data-widget="remove" title="Remove"><i class="fa fa-times"></i></a>
-          </div> -->
+         
         </div>
         <div id="info-alert">
           <?=@$this->session->flashdata('msg')?>
@@ -31,8 +28,9 @@
               <tr>
                 <th class="col-md-1">No</th>
                 <th class="col-md-3">Nama Toko</th>
-                <th class="col-md-3">Nama Pemilik</th>
-                <th class="col-md-2" >Piutang (Rp)</th>
+                <th class="col-md-3">Kode Penjualan</th>
+                <th class="col-md-3">Tanggal Jatuh Tempo</th>
+                <th class="col-md-2" >Total Piutang (Rp)</th>
               </tr>
             </thead>
 
@@ -46,10 +44,10 @@
                 <td><?=$no++;?></td>
                 
                 <td><?=$l->plgnNama?></td>
-                <td><?=$l->plgnOwner?></td>
+                <td><?=$l->pnjlKode?></td>
+                <td><?=$l->pnjlJatuhTempo?></td>
                 
-                
-                <td align="right"><?php echo number_format($l->plgnPiutang)?></td>
+                <td align="right"><?php echo number_format($l->pnjlTotalBayar)?></td>
                 
               </tr>
               <?php
@@ -63,6 +61,7 @@
     <!-- END BASIC DATATABLES -->
   </div>
   <!--aaaa-->
+ 
 
 
 </section>

@@ -6,8 +6,20 @@ class C_barang extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('M_barang');
-        $this->load->model('M_satuan');
+		$this->load->model('M_userlogin');
+        $this->load->model('M_barang');
+        if($this->session->userdata('status') != "login"){
+            echo '<script>alert("Maaf, anda harus login terlebih dahulu")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }else{
+            $userNama = $this->session->userdata('userNama');
+            $cek = $this->M_userlogin->ambil_user('userNama', $userNama)->num_rows();
+
+            if($cek == 0){
+                echo '<script>alert("User tidak ditemukan di database")</script>';
+                echo'<script>window.location.href="'.base_url().'";</script>';
+            }
+        }       
 	}
     //pages
 

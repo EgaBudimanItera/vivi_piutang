@@ -8,6 +8,7 @@
 function initDatatables() {
 	/* BASIC DATATABLES */
 	$('#dataTables1').dataTable();
+	$('#dataTablesanalisa').dataTable();
 	$('#dataTables2').dataTable();
 	$('#dataTables3').dataTable();
 	$('#dataTables4').dataTable();

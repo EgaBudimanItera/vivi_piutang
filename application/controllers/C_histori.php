@@ -8,6 +8,19 @@ class C_histori extends CI_Controller {
 		parent::__construct();
 		$this->load->model('M_histori');
         $this->load->model('M_pelanggan');
+        $this->load->model('M_userlogin');
+        if($this->session->userdata('status') != "login"){
+            echo '<script>alert("Maaf, anda harus login terlebih dahulu")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }else{
+            $userNama = $this->session->userdata('userNama');
+            $cek = $this->M_userlogin->ambil_user('userNama', $userNama)->num_rows();
+
+            if($cek == 0){
+                echo '<script>alert("User tidak ditemukan di database")</script>';
+                echo'<script>window.location.href="'.base_url().'";</script>';
+            }
+        }     
 	}
     //pages
 
@@ -20,6 +33,18 @@ class C_histori extends CI_Controller {
         );
         $this->load->view('template/wrapper-admin', $data);
     }
+
+    public function analisa(){
+        $data = array(
+            'page' => 'historipiutang/dataanalisa',
+            'link' => 'analisa',
+            'script'=>'',
+            'listanalisa'=>$this->M_histori->listanalisa()->result(),
+            'listanalisa2'=>$this->M_histori->listanalisa2()->result(),
+        );
+        $this->load->view('template/wrapper-admin', $data);
+    }
+
     public function caripiutang(){
         $kodepelanggan=$this->input->post('pnjlPlgnKode',true);
         $tglawal=$this->input->post('daritanggal',true);
@@ -78,4 +103,13 @@ class C_histori extends CI_Controller {
         );
         $this->load->view('historipiutang/kartupiutang', $data);
     }
+
+    public function cetakanalisis(){
+        $data=array(
+            'listanalisa2'=>$this->M_histori->listanalisa2()->result(),
+            'listanalisa'=>$this->M_histori->listanalisa()->result(),     
+        );
+        $this->load->view('historipiutang/laporanpiutang', $data);
+    }
+    
 }

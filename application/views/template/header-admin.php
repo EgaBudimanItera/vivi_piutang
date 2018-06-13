@@ -64,14 +64,13 @@
 					<li class="dropdown profile-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-user"></i>
-							<span class="username">Username Login</span>
+							<span class="username">User</span>
 							<i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu box profile">
 							<li><div class="up-arrow"></div></li>
-							
 							<li>
-								<a href="../page/login/logout.php"><i class="fa fa-power-off"></i>Log Out</a>
+								<a href="<?=base_url()?>c_userlogin/logout"><i class="fa fa-power-off"></i>Log Out</a>
 							</li>
 						</ul>
 					</li>

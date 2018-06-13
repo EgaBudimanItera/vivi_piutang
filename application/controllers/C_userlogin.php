@@ -7,11 +7,22 @@ class C_userlogin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('M_userlogin');
+        if($this->session->userdata('status') != "login"){
+            echo '<script>alert("Maaf, anda harus login terlebih dahulu")</script>';
+            echo'<script>window.location.href="'.base_url().'";</script>';
+        }else{
+            $userNama = $this->session->userdata('userNama');
+            $cek = $this->M_userlogin->ambil_user('userNama', $userNama)->num_rows();
+
+            if($cek == 0){
+                echo '<script>alert("User tidak ditemukan di database")</script>';
+                echo'<script>window.location.href="'.base_url().'";</script>';
+            }
+        }     
 	}
     //pages
     public function index(){
         $userId=$this->session->userdata('userId');
-        $userId='2';
         $data = array(
             'page' => 'userlogin/datauserlogin',
             'link' => 'userlogin',
@@ -104,24 +115,33 @@ class C_userlogin extends CI_Controller {
         $userId=$this->session->userdata('userId');
         $userNama=$this->session->userdata('userNama');//ambil dari session
         
-        $userPasswordBaru=$this->input->post('userPasswordBaru',true);
+        $userPasswordBaru=md5($this->input->post('userPasswordBaru',true));
+        
         $data=array(
             'userPassword'=>$userPasswordBaru,
         );
         $ubah=$this->M_userlogin->ubah_userlogin('userId',$userId,$data);
         if($ubah){
-        $this->session->set_flashdata(
-            'msg', 
-            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
-        );
-        redirect(base_url().'c_userlogin/ubahpassword'); //location
-     }else{
-       $this->session->set_flashdata(
-            'msg', 
-            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
-        );
-       redirect(base_url().'c_userlogin/ubahpassword'); //location
-     }
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+            );
+            echo '<script>alert("Berhasil Ubah Password !! Silahkan Login Kembali")</script>';
+            $this->M_userlogin->logout();
+            echo'<script>window.location.href="'.base_url().'";</script>';
+            
+         }else{
+           $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+            );
+           redirect(base_url().'c_userlogin/ubahpassword'); //location
+         }
+    }
+
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect(base_url());
     }
     //etc 
 

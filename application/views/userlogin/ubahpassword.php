@@ -28,7 +28,7 @@
           <?=@$this->session->flashdata('msg')?>
         </div>
         <div class="grid-body">
-          <form class="form-horizontal" role="form" action="<?=base_url()?>c_satuan/ubahsatuan" method="post">
+          <form class="form-horizontal" role="form" action="<?=base_url()?>c_userlogin/prosesubahpassword" method="post">
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Nama User</label>

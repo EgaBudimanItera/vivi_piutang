@@ -1,0 +1,41 @@
+/*
+belum jatuh tempo
+1-30 hari
+31-60 hari
+61-90 hari
+91-180 hari
+181-365 hari
+lebih dari 365 hari
+*/
+select pnjlPlgnKode,plgnNama,pnjlKode,(TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now())) as waktutempo,
+
+(coalesce((select pnjlTotalBayar from penjualan pb where pnjlTotalBayar>0 and pb.pnjlKode=pa.pnjlKode 
+and pnjlJatuhTempo>=now()),0)) as blm_jatuh_tempo,
+
+(coalesce((select pnjlTotalBayar from penjualan pc where 
+pnjlTotalBayar>0 and pc.pnjlKode=pa.pnjlKode and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=1 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=30 ),0)) as telat_1_30_hari,
+
+(coalesce((select pnjlTotalBayar from penjualan pd where 
+pnjlTotalBayar>0 and pd.pnjlKode=pa.pnjlKode and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=31 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=60 ),0)) as telat_31_60_hari,
+
+(coalesce((select pnjlTotalBayar from penjualan pe where 
+pnjlTotalBayar>0 and pe.pnjlKode=pa.pnjlKode and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=61 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=90 ),0)) as telat_61_90_hari,
+
+(coalesce((select pnjlTotalBayar from penjualan pf where 
+pnjlTotalBayar>0 and pf.pnjlKode=pa.pnjlKode and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=91 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=180 ),0)) as telat_91_180_hari,
+
+(coalesce((select pnjlTotalBayar from penjualan pg where 
+pnjlTotalBayar>0 and pg.pnjlKode=pa.pnjlKode and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=181 and
+((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)<=365 ),0)) as telat_181_365_hari,
+
+(coalesce((select pnjlTotalBayar from penjualan ph where 
+pnjlTotalBayar>0 and ph.pnjlKode=pa.pnjlKode and ((TO_DAYS(pnjlJatuhTempo)-TO_DAYS(now()))*-1)>=366),0)) as telat_lebih_366_hari
+
+from penjualan pa
+join pelanggan on(pnjlPlgnKode=plgnKode)
+order by pnjlPlgnKode asc
+

@@ -32,4 +32,11 @@ class M_userlogin extends CI_Model {
     function ambil_user($param_kode, $kode){
        return $this->db->get_where('userlogin', array($param_kode => $kode));
     }
+
+    function cek_login($where){      
+        return $this->db->get_where('userlogin',$where);
+    }
+    function logout(){
+        $this->session->sess_destroy();
+    }   
 }
