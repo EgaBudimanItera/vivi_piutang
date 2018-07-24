@@ -15,6 +15,12 @@ class M_pembayaran extends CI_Model {
         return true;
     }
 
+    function update_pembayaran($param_kode, $kode, $data){
+        $this->db->where($param_kode, $kode);
+        $this->db->update('pembayaran', $data); 
+        return true;
+    }
+
     function list_pembayaran(){
          $this->db->select('*');
          $this->db->from('vw_pembayaran');

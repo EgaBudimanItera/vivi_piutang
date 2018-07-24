@@ -49,14 +49,14 @@ class C_histori extends CI_Controller {
         $kodepelanggan=$this->input->post('pnjlPlgnKode',true);
         $tglawal=$this->input->post('daritanggal',true);
         $tglakhir=$this->input->post('hinggatanggal',true);
-        $jumlahdataawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->jumlah;
+        $jumlahdataawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->num_rows();
         if($jumlahdataawal==0){
             $saldoawal=0;
         }
         else{
             $saldoawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->histSaldo;
         }
-        $jumlahdataakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->row()->jumlah;
+        $jumlahdataakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->num_rows();
         if($jumlahdataakhir==0){
             $saldoakhir=0;
         }
@@ -76,16 +76,17 @@ class C_histori extends CI_Controller {
             'namapelanggan'=>$this->M_pelanggan->ambil_pelanggan('plgnKode',$kodepelanggan)->row(),
         );
         $this->load->view('template/wrapper-admin', $data);
+
     }
     public function cetakkartu($kodepelanggan,$tglawal,$tglakhir){
-        $jumlahdataawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->jumlah;
+        $jumlahdataawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->num_rows();
         if($jumlahdataawal==0){
             $saldoawal=0;
         }
         else{
             $saldoawal=$this->M_histori->listhistori_saldoawal($kodepelanggan,$tglawal)->row()->histSaldo;
         }
-        $jumlahdataakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->row()->jumlah;
+        $jumlahdataakhir=$this->M_histori->listhistori_saldoakhir($kodepelanggan)->num_rows();
         if($jumlahdataakhir==0){
             $saldoakhir=0;
         }

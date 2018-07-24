@@ -46,6 +46,14 @@ class C_penjualan extends CI_Controller {
         $this->load->view('template/wrapper-admin', $data);
     }
 
+    public function printnota($pnjlKode){
+        $data=array(
+            'listnota'=>$this->M_penjualan->list_penjualan2($pnjlKode),
+            'listpelanggan'=>$this->M_penjualan->list_penjualan3($pnjlKode),    
+        );
+        $this->load->view('penjualan/nota', $data);
+    }
+
     public function tambahpenjualan1(){
         $kodepelanggan=$this->input->post('pnjlPlgnKode',true);
         $jumlahpiutang=$this->M_pelanggan->ambil_pelanggan('plgnKode',$kodepelanggan)->row();
@@ -185,6 +193,11 @@ class C_penjualan extends CI_Controller {
     }
 
     public function hapuspenjualan($kodepenjualan){
+        $createdby=$this->session->userdata('userNama');
+        $data=array(
+            'pnjlCreatedBy'=>$createdby,
+        ); 
+        $updatepenjualan=$this->M_penjualan->update_penjualan('pnjlKode',$kodepenjualan,$data);
         $hapuspenjualana=$this->M_penjualan->hapus_penjualan('pnjlKode',$kodepenjualan);
         if($hapuspenjualana){
             $this->session->set_flashdata(

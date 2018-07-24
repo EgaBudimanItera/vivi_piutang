@@ -67,7 +67,12 @@
                       <button type="button" class="btn btn-danger btn-xs">
                         <i class="fa fa-trash-o"></i>                      
                       </button>
-                    </a>       
+                    </a>    
+                    <a href="<?=base_url()?>c_penjualan/printnota/<?=$l->pnjlKode?>" target="_blank">
+                      <button type="button" class="btn btn-primary btn-xs">
+                        <i class="fa fa-print"></i>
+                      </button>
+                    </a>   
                   </center>                 
                 </td>
               </tr>

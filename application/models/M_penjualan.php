@@ -24,6 +24,13 @@ class M_penjualan extends CI_Model {
         return true;
     }
 
+     function update_penjualan($param_kode, $kode, $data){
+        $this->db->where($param_kode, $kode);
+        $this->db->update('penjualan', $data); 
+        return true;
+    }
+
+
     //hapus 
     function hapus_penjualan_detail_temp($param_kode, $kode){
         $this->db->delete('penjualan_detail_temp', array($param_kode => $kode)); 
@@ -52,6 +59,27 @@ class M_penjualan extends CI_Model {
         $this->db->from('penjualan');
         $this->db->join('pelanggan','pnjlPlgnKode=plgnKode');
         $query=$this->db->get()->result();
+        return $query;
+
+    }
+
+    function list_penjualan2($pnjlKode){
+        $this->db->select('*');
+        $this->db->from('penjualan_detail');
+        $this->db->join('penjualan','detpPnjlKode=pnjlKode');
+        $this->db->join('pelanggan','pnjlPlgnKode=plgnKode');
+        $this->db->join('barang','detpBrngKode=brngKode');
+        $this->db->join('satuan','brngStunKode=stunKode');
+        $query=$this->db->get()->result();
+        return $query;
+
+    }
+
+    function list_penjualan3($pnjlKode){
+        $this->db->select('*');
+        $this->db->from('penjualan');
+        $this->db->join('pelanggan','pnjlPlgnKode=plgnKode');
+        $query=$this->db->get()->row();
         return $query;
 
     }
@@ -97,8 +125,6 @@ class M_penjualan extends CI_Model {
    	}
 
     function totalpenjualan($createdby){
-         
-       
         $total=$this->db->query("SELECT COALESCE(sum(subtotal),0) AS total FROM vw_detailtemp WHERE detpCreatedBy='$createdby'")  ;
         return $total->row();  
     }

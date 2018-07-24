@@ -3,7 +3,7 @@
 
 class M_histori extends CI_Model {
 	function listhistori_saldoawal($kodepelanggan,$tglawal){
-    	$this->db->select('*,count(*)as jumlah');
+    	$this->db->select('*');
     	$this->db->from('vw_histori');
     	$this->db->where(array('histPlgnKode'=>$kodepelanggan,'histTanggal<'=>$tglawal));
     	$this->db->order_by("histKode","desc");
@@ -11,7 +11,7 @@ class M_histori extends CI_Model {
     	return $query=$this->db->get();
     }
     function listhistori_saldoakhir($kodepelanggan){
-    	$this->db->select('*,count(*)as jumlah');
+    	$this->db->select('*');
     	$this->db->from('vw_histori');
     	$this->db->where(array('histPlgnKode'=>$kodepelanggan));
     	$this->db->order_by("histKode","desc");

@@ -82,5 +82,28 @@ class C_pembayaran extends CI_Controller {
         }
 
     }
+
+    public function hapuspembayaran($pybrKode){
+        $createdby=$this->session->userdata('userNama');
+        $data=array(
+            'pybrCreatedBy'=>$createdby,
+        ); 
+        $updatecreated=$this->M_pembayaran->update_pembayaran('pybrKode',$pybrKode,$data);
+        $hapuspembayaran=$this->M_pembayaran->hapus_pembayaran('pybrKode',$pybrKode);
+        if($hapuspembayaran){
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Hapus Data Pembayaran Berhasil </div>'
+            );
+            redirect(base_url().'c_pembayaran'); //location
+        }
+        else{
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-waning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Hapus Data Pembayaran Gagal </div>'
+            );
+            redirect(base_url().'c_pembayaran'); //location
+        }   
+    }
     //etc
 }

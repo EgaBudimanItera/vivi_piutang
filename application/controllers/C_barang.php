@@ -8,6 +8,7 @@ class C_barang extends CI_Controller {
 		parent::__construct();
 		$this->load->model('M_userlogin');
         $this->load->model('M_barang');
+          $this->load->model('M_satuan');
         if($this->session->userdata('status') != "login"){
             echo '<script>alert("Maaf, anda harus login terlebih dahulu")</script>';
             echo'<script>window.location.href="'.base_url().'";</script>';
