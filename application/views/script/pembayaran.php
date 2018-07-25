@@ -22,11 +22,11 @@
     function simpan(){
         var pybrPnjlKode=$('#pnjlKode').val();
         var pybrJumlahBayar=$('#pybrJumlahBayar').val();
-        
+        var pybrTanggal=$('#pybrTanggal').val();
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_pembayaran/simpanpembayaran',
-            data: 'pybrPnjlKode='+pybrPnjlKode+'&pybrJumlahBayar='+pybrJumlahBayar,
+            data: 'pybrPnjlKode='+pybrPnjlKode+'&pybrJumlahBayar='+pybrJumlahBayar+'&pybrTanggal='+pybrTanggal,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){ 

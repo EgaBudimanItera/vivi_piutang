@@ -58,6 +58,16 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-sm-2 control-label">Tanggal Penjualan</label>
+              <div class="col-sm-3">
+                <div class="input-group date form_date" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
+                <input type="text" class="form-control" name="tgljual" required="" id="tgljual">
+                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                </div>
+                <input type="hidden" id="dtp_input" value="" required="" />
+              </div>
+            </div>
+            <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <div class="btn-group">
                   <button type="submit" class="btn btn-primary">Next</button>

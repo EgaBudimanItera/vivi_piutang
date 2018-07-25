@@ -93,14 +93,24 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-sm-4 control-label">Tanggal Pembayaran</label>
+              <div class="col-sm-6">
+                <div class="input-group date form_date" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
+                <input type="text" class="form-control" name="pybrTanggal" required="" id="pybrTanggal">
+                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                </div>
+                <input type="hidden" id="dtp_input" value="" required="" />
+              </div>
+            </div>
+            <div class="form-group">
               <label class="col-sm-4 control-label">Total Penjualan (Rp)</label>
-              <div class="col-sm-5">
+              <div class="col-sm-6">
                 <input name="pnjlTotalPenjualan" id="pnjlTotalPenjualan" type="number" class="form-control" " maxlength="12" readonly>
               </div>
             </div> 
              <div class="form-group">
               <label class="col-sm-4 control-label">Total Pembayaran (Rp)</label>
-              <div class="col-sm-5">
+              <div class="col-sm-6">
                 <input name="pybrJumlahBayar" type="number" class="form-control" id="pybrJumlahBayar" maxlength="12" required="">
               </div>
             </div> 

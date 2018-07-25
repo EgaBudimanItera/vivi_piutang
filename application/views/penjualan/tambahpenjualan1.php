@@ -32,6 +32,7 @@
               <label class="col-sm-2 control-label">Nama Toko</label>
               <div class="col-sm-3">
                 <input name="plgnNama" type="text" class="form-control" value="<?=$listpelanggan->plgnNama?>" maxlength="30" readonly="">
+                <input name="tgljual" type="hidden" class="form-control" value="<?=$tgljual?>" maxlength="30" readonly="">
               </div>
             </div>
             <div class="form-group">

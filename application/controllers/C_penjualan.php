@@ -66,6 +66,7 @@ class C_penjualan extends CI_Controller {
                 'kodepelanggan'=>$kodepelanggan,
                 'listbarang'=>$this->M_barang->list_barang(),
                 'listpelanggan'=>$jumlahpiutang,
+                'tgljual'=>$this->input->post('tgljual',true),
             );
             $this->load->view('template/wrapper-admin', $data);
         }
@@ -77,14 +78,14 @@ class C_penjualan extends CI_Controller {
             redirect(base_url().'c_penjualan/formtambah'); //location
         }
         
-    }
+    }   
 
     public function tambahpenjualan2(){
         $createdby=$this->session->userdata('userNama');
         
         $kodepelanggan=$this->input->post('plgnKode',true);
         $kodepenjualan=$this->M_penjualan->kode_penjualan();
-        $tanggal=date('Y-m-d');
+        $tanggal=$this->input->post('tgljual',true);
         $jatuhtempo=date('Y-m-d',strtotime('+30 days'));
         $totalpenjualan=$this->M_penjualan->totalpenjualan($createdby)->total;
         

@@ -44,13 +44,15 @@
                     loadTable();
                     $('#detailbarangModal').modal('hide');
                     $('#formTambahBarang')[0].reset();
+                   $('#kodebarang').val(null).trigger('change');
                     
                 }else if(msg.status == 'fail'){
                    
                    loadTable();
-                   alert('gagal tambah data')
+                   alert('gagal tambah data');
                     $('#detailbarangModal').modal('hide');
                     $('#formTambahBarang')[0].reset();
+                    $('#kodebarang').val(null).trigger('change');
                 }
             }
           });

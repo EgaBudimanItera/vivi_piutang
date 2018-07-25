@@ -21,6 +21,7 @@ class M_pembayaran extends CI_Model {
         return true;
     }
 
+
     function list_pembayaran(){
          $this->db->select('*');
          $this->db->from('vw_pembayaran');

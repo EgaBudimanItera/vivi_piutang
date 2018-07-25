@@ -50,11 +50,17 @@ class C_pembayaran extends CI_Controller {
     //crud
     public function simpanpembayaran(){
         $createdby=$this->session->userdata('userNama');
-       
         $pybrPnjlKode=$this->input->post('pybrPnjlKode',0);
         $pybrJumlahBayar=$this->input->post('pybrJumlahBayar',0);
+        $pnjlTotalBayar=$this->M_penjualan->list_view_penjualan_1baris($pybrPnjlKode)->pnjlTotalBayar;
+        if($pybrJumlahBayar>$pnjlTotalBayar){
+            $pybrJumlahBayar=$pnjlTotalBayar;
+        }
+        else{
+            $pybrJumlahBayar=$pybrJumlahBayar;
+        }
         $pybrKode=$this->M_pembayaran->kode_pembayaran();
-        $tanggal=date('Y-m-d');
+        $tanggal=$this->input->post('pybrTanggal',true);
 
         $data=array(
             'pybrKode'=>$pybrKode,
