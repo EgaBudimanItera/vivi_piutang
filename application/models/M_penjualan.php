@@ -70,6 +70,7 @@ class M_penjualan extends CI_Model {
         $this->db->join('pelanggan','pnjlPlgnKode=plgnKode');
         $this->db->join('barang','detpBrngKode=brngKode');
         $this->db->join('satuan','brngStunKode=stunKode');
+        $this->db->where(array('detpPnjlKode'=>$pnjlKode));
         $query=$this->db->get()->result();
         return $query;
 

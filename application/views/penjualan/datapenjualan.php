@@ -57,23 +57,30 @@
                 <td><?=$l->plgnNama?></td>
                 <td align="right"><?php echo number_format($l->pnjlTotalPenjualan)?></td>
                 <td>
-                  <center>
+                  
                     <a href="<?=base_url()?>c_penjualan/detailpenjualan/<?=$l->pnjlKode?>">
                       <button type="button" class="btn btn-primary btn-xs">
                         <i class="fa fa-eye"></i>
                       </button>
                     </a>
+                    <?php 
+                      if($l->pnjlTotalPenjualan==$l->pnjlTotalBayar){
+                    ?>
                     <a href="<?=base_url()?>c_penjualan/hapuspenjualan/<?=$l->pnjlKode?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')">
                       <button type="button" class="btn btn-danger btn-xs">
                         <i class="fa fa-trash-o"></i>                      
                       </button>
-                    </a>    
+                    </a>  
+                    <?php
+                      }
+                    ?>
+                      
                     <a href="<?=base_url()?>c_penjualan/printnota/<?=$l->pnjlKode?>" target="_blank">
                       <button type="button" class="btn btn-primary btn-xs">
                         <i class="fa fa-print"></i>
                       </button>
                     </a>   
-                  </center>                 
+                                  
                 </td>
               </tr>
               <?php

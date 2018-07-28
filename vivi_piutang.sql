@@ -24,12 +24,14 @@ CREATE TABLE `barang` (
   `brngNama` varchar(40) DEFAULT NULL,
   `brngStunKode` varchar(5) DEFAULT NULL,
   `brngHargaJual` double DEFAULT NULL,
-  PRIMARY KEY (`brngKode`)
+  PRIMARY KEY (`brngKode`),
+  KEY `FK_barang` (`brngStunKode`),
+  CONSTRAINT `FK_barang` FOREIGN KEY (`brngStunKode`) REFERENCES `satuan` (`stunKode`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngKode`,`brngNama`,`brngStunKode`,`brngHargaJual`) values ('B001','Garam','S002',10000),('B002','Garam','S004',40000),('B003',NULL,NULL,NULL);
+insert  into `barang`(`brngKode`,`brngNama`,`brngStunKode`,`brngHargaJual`) values ('B001','Garam','S002',10000),('B002','Garam','S004',40000),('B003',NULL,NULL,NULL),('B004','Garam Halus','S003',14500);
 
 /*Table structure for table `historipiutang` */
 
@@ -44,12 +46,14 @@ CREATE TABLE `historipiutang` (
   `histKredit` double DEFAULT NULL,
   `histSaldo` double DEFAULT NULL,
   `histCreatedBy` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`histKode`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`histKode`),
+  KEY `FK_historipiutang` (`histPlgnKode`),
+  CONSTRAINT `FK_historipiutang` FOREIGN KEY (`histPlgnKode`) REFERENCES `pelanggan` (`plgnKode`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 /*Data for the table `historipiutang` */
 
-insert  into `historipiutang`(`histKode`,`histTanggal`,`histPlgnKode`,`histKeterangan`,`histDebet`,`histKredit`,`histSaldo`,`histCreatedBy`) values (1,'2018-06-11','P002','Penjualan',4000000,0,4000000,'ega'),(2,'2018-06-11','P003','Penjualan',15000000,0,15000000,'ega'),(3,'2018-06-12','P002','Pembayaran Piutang',0,4000000,0,'Aqila'),(4,'2018-06-14','P004','Penjualan',6220000,0,6220000,'Aryanti'),(5,'2018-06-14','P004','Pembayaran Piutang',0,6220000,0,'Aqila');
+insert  into `historipiutang`(`histKode`,`histTanggal`,`histPlgnKode`,`histKeterangan`,`histDebet`,`histKredit`,`histSaldo`,`histCreatedBy`) values (1,'2018-06-11','P002','Penjualan',4000000,0,4000000,'ega'),(2,'2018-06-11','P003','Penjualan',15000000,0,15000000,'ega'),(3,'2018-06-12','P002','Pembayaran Piutang',0,4000000,0,'Aqila'),(4,'2018-06-14','P004','Penjualan',6220000,0,6220000,'Aryanti'),(5,'2018-06-14','P004','Pembayaran Piutang',0,6220000,0,'Aqila'),(6,'2018-06-29','P002','Hapus Penjualan',0,4000000,-4000000,'ega'),(7,'2018-06-29','P004','Penjualan',43500,0,43500,'Penjualan'),(8,'2018-06-29','P004','Hapus Penjualan',0,43500,0,'Penjualan'),(9,'2018-06-30','P004','Hapus Pembayaran Piutang',6220000,0,6220000,'ADM'),(10,'2018-06-30','P004','Pembayaran Piutang',0,6220000,0,'ADM'),(11,'2018-06-30','P004','Hapus Pembayaran Piutang',6220000,0,6220000,'ADM'),(12,'2018-06-30','P004','Hapus Penjualan',0,6220000,0,'Penjualan'),(13,'2018-07-11','P004','Penjualan',200000,0,200000,'Penjualan'),(14,'2018-07-25','P005','Penjualan',1000000,0,1000000,'penjualan'),(15,'2018-07-26','P006','Penjualan',145000,0,145000,'Penjualan'),(16,'2018-07-26','P007','Penjualan',100000,0,100000,'Penjualan'),(17,'2018-07-26','P004','Pembayaran Piutang',0,200000,0,'ADM'),(18,'2018-07-26','P007','Pembayaran Piutang',0,100000,0,'ADM'),(19,'2018-07-26','P006','Pembayaran Piutang',0,145000,0,'ADM'),(20,'2018-07-26','P008','Penjualan',100000,0,100000,'Penjualan'),(21,'2018-07-01','P009','Penjualan',100000,0,100000,'Penjualan'),(22,'2018-07-03','P009','Pembayaran Piutang',0,100000,0,'ADM'),(23,'2018-07-01','P009','Hapus Penjualan',0,100000,-100000,'Penjualan'),(24,'2018-07-01','P008','Hapus Penjualan',0,100000,0,'Penjualan'),(25,'2018-07-04','P007','Hapus Penjualan',0,100000,-100000,'Penjualan');
 
 /*Table structure for table `pelanggan` */
 
@@ -67,7 +71,7 @@ CREATE TABLE `pelanggan` (
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`plgnKode`,`plgnNama`,`plgnOwner`,`plgnAlamat`,`plgnTelp`,`plgnPiutang`) values ('P002','Toko B','Budiman','Road','881918198',0),('P003','Toko C','Budi','ui','345677',15000000),('P004','CV Aqila','Aqila','aa','11111',0);
+insert  into `pelanggan`(`plgnKode`,`plgnNama`,`plgnOwner`,`plgnAlamat`,`plgnTelp`,`plgnPiutang`) values ('P002','Toko B','Budiman','Road','881918198',-4000000),('P003','Toko C','Budi','ui','345677',15000000),('P004','CV Aqila','Aqila','aa','11111',0),('P005','toko E','ega','aa','111',1000000),('P006','toko F','F','jalan F','89898989',0),('P007','toko G','G','G','666',-100000),('P008','toko H','H','H','77',0),('P009','toko i','i','i','88',-100000);
 
 /*Table structure for table `pembayaran` */
 
@@ -79,12 +83,14 @@ CREATE TABLE `pembayaran` (
   `pybrPnjlKode` varchar(16) DEFAULT NULL,
   `pybrJumlahBayar` double DEFAULT NULL,
   `pybrCreatedBy` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`pybrKode`)
+  PRIMARY KEY (`pybrKode`),
+  KEY `FK_pembayaran` (`pybrPnjlKode`),
+  CONSTRAINT `FK_pembayaran` FOREIGN KEY (`pybrPnjlKode`) REFERENCES `penjualan` (`pnjlKode`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `pembayaran` */
 
-insert  into `pembayaran`(`pybrKode`,`pybrTanggal`,`pybrPnjlKode`,`pybrJumlahBayar`,`pybrCreatedBy`) values ('R-0618-00001','2018-06-12','P-0618-00001',4000000,'Aqila'),('R-0618-00002','2018-06-13','P-0618-00003',6220000,'Aqila');
+insert  into `pembayaran`(`pybrKode`,`pybrTanggal`,`pybrPnjlKode`,`pybrJumlahBayar`,`pybrCreatedBy`) values ('R-0718-00001','2018-07-25','P-0718-00001',200000,'ADM'),('R-0718-00002','2018-07-25',NULL,100000,'ADM'),('R-0718-00003','2018-07-06','P-0718-00003',145000,'ADM');
 
 /*Table structure for table `penjualan` */
 
@@ -98,12 +104,14 @@ CREATE TABLE `penjualan` (
   `pnjlTotalPenjualan` double DEFAULT NULL,
   `pnjlTotalBayar` double DEFAULT NULL,
   `pnjlCreatedBy` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`pnjlKode`)
+  PRIMARY KEY (`pnjlKode`),
+  KEY `FK_penjualan` (`pnjlPlgnKode`),
+  CONSTRAINT `FK_penjualan` FOREIGN KEY (`pnjlPlgnKode`) REFERENCES `pelanggan` (`plgnKode`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `penjualan` */
 
-insert  into `penjualan`(`pnjlKode`,`pnjlTanggal`,`pnjlPlgnKode`,`pnjlJatuhTempo`,`pnjlTotalPenjualan`,`pnjlTotalBayar`,`pnjlCreatedBy`) values ('P-0618-00001','2018-06-11','P002','2018-07-11',4000000,4,'ega'),('P-0618-00002','2018-06-11','P003','2018-05-01',15000000,15000000,'ega'),('P-0618-00003','2018-06-13','P004','2018-07-13',6220000,0,'Aryanti');
+insert  into `penjualan`(`pnjlKode`,`pnjlTanggal`,`pnjlPlgnKode`,`pnjlJatuhTempo`,`pnjlTotalPenjualan`,`pnjlTotalBayar`,`pnjlCreatedBy`) values ('P-0718-00001','2018-07-11','P004','2018-08-10',200000,0,'Penjualan'),('P-0718-00002','2018-07-25','P005','2018-08-24',1000000,1000000,'penjualan'),('P-0718-00003','2018-07-02','P006','2018-08-24',145000,0,'Penjualan');
 
 /*Table structure for table `penjualan_detail` */
 
@@ -115,12 +123,16 @@ CREATE TABLE `penjualan_detail` (
   `detpBrngKode` varchar(10) DEFAULT NULL,
   `detpJumlah` int(11) DEFAULT NULL,
   `detpHarga` double DEFAULT NULL,
-  PRIMARY KEY (`detpId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`detpId`),
+  KEY `FK_penjualan_detail1` (`detpBrngKode`),
+  KEY `FK_penjualan_detail` (`detpPnjlKode`),
+  CONSTRAINT `FK_penjualan_detail` FOREIGN KEY (`detpPnjlKode`) REFERENCES `penjualan` (`pnjlKode`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `FK_penjualan_detail1` FOREIGN KEY (`detpBrngKode`) REFERENCES `barang` (`brngKode`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `penjualan_detail` */
 
-insert  into `penjualan_detail`(`detpId`,`detpPnjlKode`,`detpBrngKode`,`detpJumlah`,`detpHarga`) values (1,'P-0618-00001','B001',200,10000),(2,'P-0618-00001','B001',200,10000),(3,'P-0618-00002','B001',300,10000),(4,'P-0618-00002','B002',300,40000),(5,'P-0618-00003','B001',130,10000),(6,'P-0618-00003','B002',123,40000);
+insert  into `penjualan_detail`(`detpId`,`detpPnjlKode`,`detpBrngKode`,`detpJumlah`,`detpHarga`) values (1,'P-0718-00001','B001',20,10000),(2,'P-0718-00002','B001',20,10000),(3,'P-0718-00002','B002',20,40000),(4,'P-0718-00003','B004',10,14500),(5,NULL,'B001',10,10000),(6,NULL,'B001',10,10000);
 
 /*Table structure for table `penjualan_detail_temp` */
 
@@ -132,12 +144,12 @@ CREATE TABLE `penjualan_detail_temp` (
   `detpJumlah` int(11) DEFAULT NULL,
   `detpHarga` double DEFAULT NULL,
   `detpCreatedBy` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`detpId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`detpId`),
+  KEY `FK_penjualan_detail_temp` (`detpBrngKode`),
+  CONSTRAINT `FK_penjualan_detail_temp` FOREIGN KEY (`detpBrngKode`) REFERENCES `barang` (`brngKode`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `penjualan_detail_temp` */
-
-insert  into `penjualan_detail_temp`(`detpId`,`detpBrngKode`,`detpJumlah`,`detpHarga`,`detpCreatedBy`) values (3,'B001',100,10000,'Aryanti');
 
 /*Table structure for table `satuan` */
 
@@ -167,7 +179,7 @@ CREATE TABLE `userlogin` (
 
 /*Data for the table `userlogin` */
 
-insert  into `userlogin`(`userId`,`userNama`,`userPassword`,`userHakAkses`) values (1,'Pimpinan','202cb962ac59075b964b07152d234b70','Pimpinan'),(6,'ADM','202cb962ac59075b964b07152d234b70','ADM'),(7,'Penjualan','25f9e794323b453885f5181f1b624d0b','Penjualan'),(8,'vivi','202cb962ac59075b964b07152d234b70','Pimpinan');
+insert  into `userlogin`(`userId`,`userNama`,`userPassword`,`userHakAkses`) values (1,'Pimpinan','202cb962ac59075b964b07152d234b70','Pimpinan'),(6,'ADM','202cb962ac59075b964b07152d234b70','ADM'),(7,'Penjualan','202cb962ac59075b964b07152d234b70','Penjualan'),(8,'vivi','202cb962ac59075b964b07152d234b70','Pimpinan');
 
 /* Trigger structure for table `pembayaran` */
 
@@ -186,7 +198,7 @@ DELIMITER $$
 	set sisasaldo=(saldoawalpiutang-totalbayar);
 	update penjualan set pnjlTotalBayar=sisasaldo where pnjlKode=new.pybrPnjlKode;
 	update pelanggan set plgnPiutang=sisasaldo where plgnKode=kodepelanggan;
-	insert into historipiutang values('',now(),kodepelanggan,'Pembayaran Piutang',0,totalbayar,sisasaldo,new.pybrCreatedBy);
+	insert into historipiutang values('',new.pybrTanggal,kodepelanggan,'Pembayaran Piutang',0,totalbayar,sisasaldo,new.pybrCreatedBy);
     END */$$
 
 
@@ -209,7 +221,7 @@ DELIMITER $$
 	set sisasaldo=(saldoawalpiutang+totalbayar);
 	update penjualan set pnjlTotalBayar=sisasaldo where pnjlKode=old.pybrPnjlKode;
 	update pelanggan set plgnPiutang=sisasaldo where plgnKode=kodepelanggan;
-	insert into historipiutang values('',now(),kodepelanggan,'Hapus Pembayaran Piutang',totalbayar,0,sisasaldo,old.pybrCreatedBy);
+	insert into historipiutang values('',old.pybrTanggal,kodepelanggan,'Hapus Pembayaran Piutang',totalbayar,0,sisasaldo,old.pybrCreatedBy);
     END */$$
 
 
@@ -233,7 +245,7 @@ DELIMITER $$
 	
 	update pelanggan set plgnPiutang=sisasaldo where plgnKode=kodepelanggan;
 	
-	insert into historipiutang values('',now(),kodepelanggan,'Penjualan',totaljual,0,sisasaldo,new.pnjlCreatedBy);
+	insert into historipiutang values('',new.pnjlTanggal,kodepelanggan,'Penjualan',totaljual,0,sisasaldo,new.pnjlCreatedBy);
 	
     END */$$
 
@@ -257,7 +269,7 @@ DELIMITER $$
 	set sisasaldo=(saldoawalpiutang-totaljual);
 	
 	update pelanggan set plgnPiutang=sisasaldo where plgnKode=kodepelanggan;
-	insert into historipiutang values('',now(),kodepelanggan,'Hapus Penjualan',0,totaljual,sisasaldo,old.pnjlCreatedBy);
+	insert into historipiutang values('',old.pnjlTanggal,kodepelanggan,'Hapus Penjualan',0,totaljual,sisasaldo,old.pnjlCreatedBy);
     END */$$
 
 
